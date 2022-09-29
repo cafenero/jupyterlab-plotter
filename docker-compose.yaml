@@ -1,0 +1,25 @@
+# thanks to https://www.idnet.co.jp/column/page_187.html
+
+version: "3.9"
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jupyter-plotter
+    container_name: jupyter-plotter
+    entrypoint: >
+      jupyter-lab
+      --allow-root
+      --ip=0.0.0.0
+      --port=8888
+      --no-browser
+      --NotebookApp.token=''
+      --notebook-dir=/workspace
+    expose:
+      - "8888"
+    ports:
+      - "0.0.0.0:8888:8888"
+    volumes:
+      - ./jp/root_jupyter:/root/.jupyter
+      - ./workspace:/workspace
